@@ -1,2 +1,2 @@
 # Rhodes_CSCI2270_FinalProject
-Final project will include date manipulation methods. These methods will change date formats based on specified culture and will also offer tools to convert dates between different calendar systems.
+Final project now includes 4 functions to Cipher a text, 4 functions to Decipher a text that was ciphered using one of the previous 4 Ciphers, and 2 functions that list the Ciphers and Deciphers.
