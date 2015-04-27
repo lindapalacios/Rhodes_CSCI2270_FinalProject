@@ -9,3 +9,5 @@ Change,
 send pull request to the repo owner,
 repo owner approves changes.
 repo owners responsible for merging changes.
+
+Make contribution to at least one project.
