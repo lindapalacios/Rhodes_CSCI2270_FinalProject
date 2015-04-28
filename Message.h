@@ -7,9 +7,9 @@
 
 struct node{
 
-    char x;
-    int n;
-    int o;
+    char ch;
+    int oNum;
+    int nNum;
 };
 
 class Message
@@ -25,6 +25,12 @@ class Message
         // as well as an integer to determine how much to shift the alphabet by. The integer must
         // be between 0 and 26;
         std::string ShiftDecipher(std::string, int);
+        // This function performs a shift Cipher on the input string. An input string is required,
+        // but the integer is fixed at x = 3, which is the historical cipher Julius Caesar used.
+        std::string CaesarCipher(std::string);
+        // This function performs a shift Decipher on the input string.An input string is required,
+        // and the integer is fixed at x = 3;
+        std::string CaesarDecipher(std::string);
         // This function performs an Atbash Cipher on the input string. Only an input string is required.
         // The Alphabet is mapped to its inverse, so A->Z, B->Y, etc.
         std::string AtbashCipher(std::string);
@@ -38,10 +44,12 @@ class Message
         // "this is a test".
         std::string ReverseTransDecipher(std::string);
         // This function performs an Affine Cipher the input string. An input string is required, as well as two
-        // integers that help determine a function that maps any letter to another letter in the alphabet.
+        // integers that help determine a function that maps any letter to another letter in the alphabet. The
+        // two integers must be coprime to one another.
         std::string AffineCipher(std::string, int, int);
         // This function performs an Affine Decipher the input string. An input string is required, as well as two
-        // integers that help determine a function that maps any letter back to its original state.
+        // integers that help determine a function that maps any letter back to its original state. The integers
+        // must be coprime to one another.
         std::string AffineDecipher(std::string, int, int);
 
     protected:

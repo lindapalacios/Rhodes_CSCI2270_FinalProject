@@ -16,6 +16,49 @@ Message::~Message(){
 }
 
 // This function performs a shift Cipher on the input string. An input string is required,
+// but the integer is fixed at x = 3, which is the historical cipher Julius Caesar used.
+string Message::CaesarCipher(string input){
+    vector<char> inputChars;
+    int key = 3;
+    for(int i = 0; i < input.length(); i++){
+        if(isalpha(input[i]) != 0){
+            char temp;
+            if(tolower(input[i] != 'z'))
+                temp = static_cast<char>(tolower(input[i]) + key);
+            else    temp = static_cast<char>('a' + (key-1));
+            inputChars.push_back(temp);
+        }
+        else{
+            inputChars.push_back(input[i]);
+        }
+    }
+    string output(inputChars.begin(),inputChars.end());
+    return output;
+}
+
+// This function performs a shift Decipher on the input string. An input string is required,
+// but the integer is fixed at x = 3, which is the historical cipher Julius Caesar used.
+string Message::CaesarDecipher(string input){
+    vector<char> inputChars;
+
+    int key = 3;
+    for(int i = 0; i < input.length(); i++){
+        if(isalpha(input[i]) != 0){
+            char temp;
+            if(tolower(input[i] != 'a'))
+                temp = static_cast<char>(tolower(input[i]) - key);
+            else    temp = static_cast<char>('z' - (key-1));
+            inputChars.push_back(temp);
+        }
+        else{
+            inputChars.push_back(input[i]);
+        }
+    }
+    string output(inputChars.begin(),inputChars.end());
+    return output;
+}
+
+// This function performs a shift Cipher on the input string. An input string is required,
 // as well as an integer to determine how much to shift the alphabet by. The integer must
 // be between 0 and 26.
 string Message::ShiftCipher(string input, int key){
@@ -66,14 +109,19 @@ string Message::ReverseTransCipher(string input){
 
     for(int i = 0; i < input.length(); i++){
         if(isalpha(input[i]) != 0){
-            char temp = static_cast<char>(tolower(input[i]));
+            char temp = tolower(input[i]);
             inputChars.push_back(temp);
         }
         else{
             inputChars.push_back(input[i]);
         }
     }
-    string output(inputChars.end(),inputChars.begin());
+    vector<char> inputChars2;
+    for(int i = (inputChars.size()-1); i >= 0; i--){
+        char t = inputChars[i];
+        inputChars2.push_back(t);
+    }
+    string output(inputChars2.begin(),inputChars2.end());
     return output;
 }
 
@@ -84,14 +132,19 @@ string Message::ReverseTransDecipher(string input){
 
     for(int i = 0; i < input.length(); i++){
         if(isalpha(input[i]) != 0){
-            char temp = static_cast<char>(tolower(input[i]));
+            char temp = tolower(input[i]);
             inputChars.push_back(temp);
         }
         else{
             inputChars.push_back(input[i]);
         }
     }
-    string output(inputChars.end(),inputChars.begin());
+    vector<char> inputChars2;
+    for(int i = (inputChars.size()-1); i >= 0; i--){
+        char t = inputChars[i];
+        inputChars2.push_back(t);
+    }
+    string output(inputChars2.begin(),inputChars2.end());
     return output;
 }
 
@@ -105,18 +158,18 @@ string Message::AtbashCipher(string input){
 
     for (int i = 0; i < 27; i++){
         node* newN = new node;
-        newN->n = i;
-        newN->x = static_cast<char>(tolower('a' + i));
-        newN->o = ((a*i + b)%26);
+        newN->oNum = i;
+        newN->ch = static_cast<char>(tolower('a' + i));
+        newN->nNum = ((a*i + b)%26);
         vNode.push_back(newN);
     }
     for(int i = 0; i < input.length(); i++){
         if(isalpha(input[i]) != 0){
             for(int j = 0; j < vNode.size(); j++){
-                if(tolower(input[i]) == vNode[j]->x){
+                if(tolower(input[i]) == vNode[j]->ch){
                     for(int k = 0; k < vNode.size(); k++){
-                        if(vNode[k]->n == vNode[j]->o){
-                            inputChars.push_back(vNode[k]->x);
+                        if(vNode[k]->oNum == vNode[j]->nNum){
+                            inputChars.push_back(vNode[k]->ch);
                         }
                     }
                 }
@@ -138,20 +191,21 @@ string Message::AtbashDecipher(string input){
     int a = 25;
     int b = 25;
 
+
     for (int i = 0; i < 27; i++){
         node* newN = new node;
-        newN->n = i;
-        newN->x = static_cast<char>(tolower('a' + i));
-        newN->o = ((a*i + b)%26);
+        newN->oNum = i;
+        newN->ch = static_cast<char>(tolower('a' + i));
+        newN->nNum = ((a*i + b)%26);
         vNode.push_back(newN);
     }
     for(int i = 0; i < input.length(); i++){
         if(isalpha(input[i]) != 0){
             for(int j = 0; j < vNode.size(); j++){
-                if(tolower(input[i]) == vNode[j]->x){
+                if(tolower(input[i]) == vNode[j]->ch){
                     for(int k = 0; k < vNode.size(); k++){
-                        if(vNode[k]->n == vNode[j]->o){
-                            inputChars.push_back(vNode[k]->x);
+                        if(vNode[k]->oNum == vNode[j]->nNum){
+                            inputChars.push_back(vNode[k]->ch);
                         }
                     }
                 }
@@ -166,25 +220,26 @@ string Message::AtbashDecipher(string input){
 }
 
 // This function performs an Affine Cipher the input string. An input string is required, as well as two
-// integers that help determine a function that maps any letter to another letter in the alphabet.
+// integers that help determine a function that maps any letter to another letter in the alphabet. The integers
+// must be coprime to one another.
 string Message::AffineCipher(string input, int a, int b){
     vector<char> inputChars;
     vector<node*> vNode;
 
     for (int i = 0; i < 27; i++){
         node* newN = new node;
-        newN->n = i;
-        newN->x = static_cast<char>(tolower('a' + i));
-        newN->o = ((a*i + b)%26);
+        newN->oNum = i;
+        newN->ch = static_cast<char>(tolower('a' + i));
+        newN->nNum = ((a*i + b)%26);
         vNode.push_back(newN);
     }
     for(int i = 0; i < input.length(); i++){
         if(isalpha(input[i]) != 0){
             for(int j = 0; j < vNode.size(); j++){
-                if(tolower(input[i]) == vNode[j]->x){
+                if(tolower(input[i]) == vNode[j]->ch){
                     for(int k = 0; k < vNode.size(); k++){
-                        if(vNode[k]->n == vNode[j]->o){
-                            inputChars.push_back(vNode[k]->x);
+                        if(vNode[k]->oNum == vNode[j]->nNum){
+                            inputChars.push_back(vNode[k]->ch);
                         }
                     }
                 }
@@ -199,25 +254,35 @@ string Message::AffineCipher(string input, int a, int b){
 }
 
 // This function performs an Affine Decipher the input string. An input string is required, as well as two
-// integers that help determine a function that maps any letter back to its original state.
+// integers that help determine a function that maps any letter back to its original state. The integers
+// must be coprime to one another.
 string Message::AffineDecipher(string input, int a, int b){
     vector<char> inputChars;
     vector<node*> vNode;
 
+    int temp = -1;
+    //finding the multiplicative inverse mod 26, the size of the alphabet.
+    for (int i = 0; i < 26; i++){
+        if((i*a)%26== 1)
+            temp = i;
+    }
+
     for (int i = 0; i < 27; i++){
         node* newN = new node;
-        newN->n = i;
-        newN->x = static_cast<char>(tolower('a' + i));
-        newN->o = ((a*i + b)%26);
+        newN->oNum = i;
+        newN->ch = static_cast<char>(tolower('a' + i));
+        newN->nNum = (temp * (i - b))%26;
+        if(newN->nNum < 0)
+            newN->nNum = newN->nNum + 26;
         vNode.push_back(newN);
     }
     for(int i = 0; i < input.length(); i++){
         if(isalpha(input[i]) != 0){
             for(int j = 0; j < vNode.size(); j++){
-                if(tolower(input[i]) == vNode[j]->x){
+                if(tolower(input[i]) == vNode[j]->ch){
                     for(int k = 0; k < vNode.size(); k++){
-                        if(vNode[k]->n == vNode[j]->o){
-                            inputChars.push_back(vNode[k]->x);
+                        if(vNode[k]->oNum == vNode[j]->nNum){
+                            inputChars.push_back(vNode[k]->ch);
                         }
                     }
                 }
