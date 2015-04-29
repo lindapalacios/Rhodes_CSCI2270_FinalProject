@@ -51,7 +51,10 @@ class Message
         // integers that help determine a function that maps any letter back to its original state. The integers
         // must be coprime to one another.
         std::string AffineDecipher(std::string, int, int);
-
+        // This function returns a list of the Cipher functions available.
+        std::string ListCiphers();
+        // This function returns a list of the Decipher functions available.
+        std::string ListDeciphers();
     protected:
     private:
 };
