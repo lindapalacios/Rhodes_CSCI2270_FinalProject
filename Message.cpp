@@ -295,3 +295,13 @@ string Message::AffineDecipher(string input, int a, int b){
     string output(inputChars.begin(),inputChars.end());
     return output;
 }
+
+string Message::ListCiphers(){
+    
+    return "List of Ciphers: CaesarCipher(string input), ShiftCipher(string input, int a), ReverseTransCipher(string input), AtbashCipher(string input), AffineCipher(string input, int a, int b)."
+}
+
+string Message::ListDeciphers(){
+    
+    return "List of Deciphers: CaesarDecipher(string input), ShiftDecipher(string input, int a), ReverseTransDecipher(string input), AtbashDecipher(string input), AffineDecipher(string input, int a, int b)."
+}
