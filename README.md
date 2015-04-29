@@ -1,7 +1,7 @@
 # Rhodes_CSCI2270_FinalProject
 
 Project Summary:
-  My final project includes 4 cipher methods, 4 decipher methods, and 2 methods that give a list of cipher methods and a list of decipher methods. The 4 cipher methods either take in just a string or a string and some integer values. One will cipher a string with one of the 4 cipher methods, and then one can decipher the returned string with the related decipher method.
+  My final project includes 4 cipher methods, 4 decipher methods, and 2 methods that give a list of cipher methods and a list of decipher methods. The 4 cipher methods either take in just a string or a string and some integer values. One will cipher a string with one of the 4 cipher methods, and then one can decipher the returned string with the related decipher method. To correctly decipher, the same integer values used in the cipher must be used in the decipher, and the returned ciphered string must be passed through the decipher.
 
 Dependencies:
   My project does not require any additional libraries or dependencies.
