@@ -8,6 +8,9 @@ int main(){
 
 Message M;
 
+std::cout<<M.ListCiphers()<<endl;
+std::cout<<M.ListDeciphers()<<endl;
+
 std::string ciph = M.ShiftCipher("This is a test", 3);
 std::cout<<"Shift Cipher: "<<ciph<<std::endl;
 std::cout<<"Shift Decipher: "<<M.ShiftDecipher(ciph, 3)<<std::endl;
