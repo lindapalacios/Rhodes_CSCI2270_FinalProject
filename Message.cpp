@@ -64,6 +64,8 @@ string Message::CaesarDecipher(string input){
 string Message::ShiftCipher(string input, int key){
     vector<char> inputChars;
 
+    key = useableCipher(key);
+
     for(int i = 0; i < input.length(); i++){
         if(isalpha(input[i]) != 0){
             char temp;
@@ -85,6 +87,8 @@ string Message::ShiftCipher(string input, int key){
 // be between 0 and 26;
 string Message::ShiftDecipher(string input, int key){
     vector<char> inputChars;
+
+    key = useableCipher(key);
 
     for(int i = 0; i < input.length(); i++){
         if(isalpha(input[i]) != 0){
@@ -297,11 +301,17 @@ string Message::AffineDecipher(string input, int a, int b){
 }
 
 string Message::ListCiphers(){
-    
-    return "List of Ciphers: CaesarCipher(string input), ShiftCipher(string input, int a), ReverseTransCipher(string input), AtbashCipher(string input), AffineCipher(string input, int a, int b)."
+
+    return "List of Ciphers: CaesarCipher(string input), ShiftCipher(string input, int a), ReverseTransCipher(string input), AtbashCipher(string input), AffineCipher(string input, int a, int b).";
 }
 
 string Message::ListDeciphers(){
-    
-    return "List of Deciphers: CaesarDecipher(string input), ShiftDecipher(string input, int a), ReverseTransDecipher(string input), AtbashDecipher(string input), AffineDecipher(string input, int a, int b)."
+
+    return "List of Deciphers: CaesarDecipher(string input), ShiftDecipher(string input, int a), ReverseTransDecipher(string input), AtbashDecipher(string input), AffineDecipher(string input, int a, int b).";
+}
+
+int Message::useableCipher(int i)
+{
+    int num = i%26;
+    return num;
 }
