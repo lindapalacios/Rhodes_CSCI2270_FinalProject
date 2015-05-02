@@ -55,6 +55,7 @@ class Message
         std::string ListCiphers();
         // This function returns a list of the Decipher functions available.
         std::string ListDeciphers();
+        int useableCipher(int);
     protected:
     private:
 };
