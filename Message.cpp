@@ -20,7 +20,7 @@ Message::~Message(){
 string Message::CaesarCipher(string input){
     vector<char> inputChars;
     int key = 3;
-    for(int i = 0; i < input.length(); i++){
+    for(size_t i = 0; i < input.length(); i++){
         if(isalpha(input[i]) != 0){
             char temp;
             if(tolower(input[i] != 'z'))
@@ -42,7 +42,7 @@ string Message::CaesarDecipher(string input){
     vector<char> inputChars;
 
     int key = 3;
-    for(int i = 0; i < input.length(); i++){
+    for(size_t i = 0; i < input.length(); i++){
         if(isalpha(input[i]) != 0){
             char temp;
             if(tolower(input[i] != 'a'))
@@ -66,7 +66,7 @@ string Message::ShiftCipher(string input, int key){
 
     key = useableCipher(key);
 
-    for(int i = 0; i < input.length(); i++){
+    for(size_t i = 0; i < input.length(); i++){
         if(isalpha(input[i]) != 0){
             char temp;
             if(tolower(input[i] != 'z'))
@@ -90,7 +90,7 @@ string Message::ShiftDecipher(string input, int key){
 
     key = useableCipher(key);
 
-    for(int i = 0; i < input.length(); i++){
+    for(size_t i = 0; i < input.length(); i++){
         if(isalpha(input[i]) != 0){
             char temp;
             if(tolower(input[i] != 'a'))
@@ -111,7 +111,7 @@ string Message::ShiftDecipher(string input, int key){
 string Message::ReverseTransCipher(string input){
     vector<char> inputChars;
 
-    for(int i = 0; i < input.length(); i++){
+    for(size_t i = 0; i < input.length(); i++){
         if(isalpha(input[i]) != 0){
             char temp = tolower(input[i]);
             inputChars.push_back(temp);
@@ -134,7 +134,7 @@ string Message::ReverseTransCipher(string input){
 string Message::ReverseTransDecipher(string input){
     vector<char> inputChars;
 
-    for(int i = 0; i < input.length(); i++){
+    for(size_t i = 0; i < input.length(); i++){
         if(isalpha(input[i]) != 0){
             char temp = tolower(input[i]);
             inputChars.push_back(temp);
@@ -167,11 +167,11 @@ string Message::AtbashCipher(string input){
         newN->nNum = ((a*i + b)%26);
         vNode.push_back(newN);
     }
-    for(int i = 0; i < input.length(); i++){
+    for(size_t i = 0; i < input.length(); i++){
         if(isalpha(input[i]) != 0){
-            for(int j = 0; j < vNode.size(); j++){
+            for(size_t j = 0; j < vNode.size(); j++){
                 if(tolower(input[i]) == vNode[j]->ch){
-                    for(int k = 0; k < vNode.size(); k++){
+                    for(size_t k = 0; k < vNode.size(); k++){
                         if(vNode[k]->oNum == vNode[j]->nNum){
                             inputChars.push_back(vNode[k]->ch);
                         }
@@ -203,11 +203,11 @@ string Message::AtbashDecipher(string input){
         newN->nNum = ((a*i + b)%26);
         vNode.push_back(newN);
     }
-    for(int i = 0; i < input.length(); i++){
+    for(size_t i = 0; i < input.length(); i++){
         if(isalpha(input[i]) != 0){
-            for(int j = 0; j < vNode.size(); j++){
+            for(size_t j = 0; j < vNode.size(); j++){
                 if(tolower(input[i]) == vNode[j]->ch){
-                    for(int k = 0; k < vNode.size(); k++){
+                    for(size_t k = 0; k < vNode.size(); k++){
                         if(vNode[k]->oNum == vNode[j]->nNum){
                             inputChars.push_back(vNode[k]->ch);
                         }
@@ -237,11 +237,11 @@ string Message::AffineCipher(string input, int a, int b){
         newN->nNum = ((a*i + b)%26);
         vNode.push_back(newN);
     }
-    for(int i = 0; i < input.length(); i++){
+    for(size_t i = 0; i < input.length(); i++){
         if(isalpha(input[i]) != 0){
-            for(int j = 0; j < vNode.size(); j++){
+            for(size_t j = 0; j < vNode.size(); j++){
                 if(tolower(input[i]) == vNode[j]->ch){
-                    for(int k = 0; k < vNode.size(); k++){
+                    for(size_t k = 0; k < vNode.size(); k++){
                         if(vNode[k]->oNum == vNode[j]->nNum){
                             inputChars.push_back(vNode[k]->ch);
                         }
@@ -280,11 +280,11 @@ string Message::AffineDecipher(string input, int a, int b){
             newN->nNum = newN->nNum + 26;
         vNode.push_back(newN);
     }
-    for(int i = 0; i < input.length(); i++){
+    for(size_t i = 0; i < input.length(); i++){
         if(isalpha(input[i]) != 0){
-            for(int j = 0; j < vNode.size(); j++){
+            for(size_t j = 0; j < vNode.size(); j++){
                 if(tolower(input[i]) == vNode[j]->ch){
-                    for(int k = 0; k < vNode.size(); k++){
+                    for(size_t k = 0; k < vNode.size(); k++){
                         if(vNode[k]->oNum == vNode[j]->nNum){
                             inputChars.push_back(vNode[k]->ch);
                         }
